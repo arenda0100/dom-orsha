@@ -1695,3 +1695,210 @@ input, textarea { font-family: inherit; font-size: inherit; }
   transform: translateY(-3px);
   box-shadow: 0 16px 40px rgba(245, 239, 230, 0.3);
 }
+/* ======================================================= */
+/* ===== БАНЯ — ТЕПЕРЬ 2 КАРТОЧКИ, А НЕ 3 ===== */
+/* ======================================================= */
+
+.banya__grid {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ======================================================= */
+/* ===== СЕКЦИЯ «БЕСЕДКА» ===== */
+/* ======================================================= */
+
+.gazebo {
+  padding: 120px 0;
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
+}
+
+.gazebo__intro {
+  max-width: 640px;
+  margin: 24px auto 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-style: italic;
+  color: var(--text-dim);
+  line-height: 1.6;
+  text-align: center;
+}
+
+.gazebo__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: stretch;
+}
+
+/* Первая карточка — на всю ширину */
+.gazebo-card--wide {
+  grid-column: span 2;
+}
+
+/* Карточки */
+.gazebo-card {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-alt);
+  box-shadow: 0 12px 40px rgba(45, 37, 32, 0.08);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Обводка градиентная */
+.gazebo-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  padding: 2px;
+  background: linear-gradient(135deg, var(--terracotta), var(--sand), var(--wood));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.5;
+  transition: var(--transition);
+  z-index: 2;
+}
+
+.gazebo-card:hover::before {
+  opacity: 1;
+}
+
+.gazebo-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 56px rgba(198, 106, 63, 0.25);
+}
+
+/* Изображение */
+.gazebo-card__img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  position: relative;
+}
+
+.gazebo-card--wide .gazebo-card__img {
+  aspect-ratio: 21 / 9;
+}
+
+.gazebo-card__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.gazebo-card:hover .gazebo-card__img img {
+  transform: scale(1.06);
+}
+
+/* Текстовая часть */
+.gazebo-card__body {
+  padding: 32px 36px 36px;
+  position: relative;
+  flex-grow: 1;
+}
+
+.gazebo-card__num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--terracotta);
+  letter-spacing: 0.2em;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.gazebo-card__title {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 12px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.gazebo-card--accent .gazebo-card__title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.gazebo-card__text {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+}
+
+.gazebo-card__hand {
+  font-family: 'Caveat', cursive;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--terracotta);
+  margin-top: 8px;
+  line-height: 1.2;
+}
+
+/* Адаптив */
+@media (max-width: 1000px) {
+  .gazebo__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gazebo-card--wide {
+    grid-column: span 1;
+  }
+
+  .gazebo-card--wide .gazebo-card__img {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (max-width: 640px) {
+  .gazebo {
+    padding: 80px 0;
+  }
+
+  .gazebo__grid {
+    gap: 20px;
+  }
+
+  .gazebo-card__body {
+    padding: 24px 22px 28px;
+  }
+
+  .gazebo-card__title {
+    font-size: 20px;
+  }
+
+  .gazebo-card--accent .gazebo-card__title {
+    font-size: 24px;
+  }
+
+  .gazebo-card__text {
+    font-size: 14px;
+  }
+
+  .gazebo-card__hand {
+    font-size: 20px;
+  }
+
+  .gazebo__intro {
+    font-size: 17px;
+  }
+
+  .banya__grid {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+}
