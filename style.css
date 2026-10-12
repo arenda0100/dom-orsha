@@ -1675,3 +1675,23 @@ input, textarea { font-family: inherit; font-size: inherit; }
   text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
   letter-spacing: 0.02em;
 }
+/* ======================================================= */
+/* ===== КНОПКА «СМОТРЕТЬ ФОТО» — КРЕМОВАЯ ===== */
+/* ======================================================= */
+
+.btn--cream {
+  background: rgba(245, 239, 230, 0.95);
+  color: #2d2520;
+  border: 2px solid rgba(245, 239, 230, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-weight: 600;
+}
+
+.btn--cream:hover {
+  background: #ffffff;
+  color: #c66a3f;
+  border-color: #f0b48a;
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(245, 239, 230, 0.3);
+}
