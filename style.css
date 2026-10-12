@@ -1034,3 +1034,173 @@ input, textarea { font-family: inherit; font-size: inherit; }
 ::-webkit-scrollbar-track { background: var(--bg-soft); }
 ::-webkit-scrollbar-thumb { background: var(--terracotta); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--terracotta-dark); }
+/* ======================================================= */
+/* ===== СТИЛИ ДЛЯ МЕССЕНДЖЕРОВ ===== */
+/* ======================================================= */
+
+.messengers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.messenger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  background: var(--bg-alt);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.messenger__icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.messenger__text {
+  font-size: 14px;
+}
+
+.messenger:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Instagram — градиент */
+.messenger--ig:hover {
+  border-color: #e1306c;
+  background: linear-gradient(135deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+  color: #fff;
+}
+.messenger--ig:hover .messenger__icon { transform: scale(1.15) rotate(-6deg); }
+.messenger--ig .messenger__icon { transition: var(--transition); }
+
+/* Telegram — синий */
+.messenger--tg:hover {
+  border-color: #0088cc;
+  background: #0088cc;
+  color: #fff;
+}
+.messenger--tg:hover .messenger__icon { transform: scale(1.15); }
+.messenger--tg .messenger__icon { transition: var(--transition); }
+
+/* Viber — фиолетовый */
+.messenger--vb:hover {
+  border-color: #7360f2;
+  background: #7360f2;
+  color: #fff;
+}
+.messenger--vb:hover .messenger__icon { transform: scale(1.15); }
+.messenger--vb .messenger__icon { transition: var(--transition); }
+
+/* WhatsApp — зелёный */
+.messenger--wa:hover {
+  border-color: #25d366;
+  background: #25d366;
+  color: #fff;
+}
+.messenger--wa:hover .messenger__icon { transform: scale(1.15) rotate(6deg); }
+.messenger--wa .messenger__icon { transition: var(--transition); }
+
+/* Адаптив — на узких экранах мессенджеры в столбик */
+@media (max-width: 640px) {
+  .messengers {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ======================================================= */
+/* ===== СТИЛИ ДЛЯ КАРТЫ ЯНДЕКС ===== */
+/* ======================================================= */
+
+.map-section {
+  padding: 120px 0;
+  background: var(--bg-alt);
+}
+
+.map__wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(45, 37, 32, 0.1);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.map__wrapper::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: calc(var(--radius) + 2px);
+  padding: 2px;
+  background: linear-gradient(135deg, var(--terracotta), var(--sand), var(--wood));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.6;
+  z-index: 2;
+}
+
+.map__iframe {
+  display: block;
+  width: 100%;
+  height: 500px;
+  border: 0;
+  border-radius: var(--radius);
+}
+
+.map__actions {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.map__address {
+  font-size: 15px;
+  color: var(--text-dim);
+  font-style: italic;
+  max-width: 600px;
+}
+
+@media (max-width: 640px) {
+  .map-section { padding: 80px 0; }
+  .map__iframe { height: 350px; }
+  .map__actions .btn {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
+/* ======================================================= */
+/* ===== СЕТКА КАРТОЧЕК — 4 В РЯД, НО АДАПТИВНО ===== */
+/* ======================================================= */
+
+/* Оставляем 4 колонки в ряд для 8 карточек — всё аккуратно */
+@media (min-width: 1001px) {
+  .features__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ======================================================= */
+/* ===== КОНТАКТЫ: делаем блок с мессенджерами шире ===== */
+/* ======================================================= */
+
+@media (min-width: 1001px) {
+  .contacts__info .info-block:nth-child(2) {
+    grid-column: span 2;
+  }
+}
