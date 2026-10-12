@@ -318,15 +318,14 @@
           <div class="form__row">
             <input type="tel" name="phone" placeholder="Телефон" required>
           </div>
-          <div class="form__row form__row--two">
-            <input type="date" name="checkin" required>
-            <input type="date" name="checkout" required>
+          <div class="form__row">
+            <input type="text" name="dates" placeholder="Даты заезда и выезда" required>
           </div>
           <div class="form__row">
             <input type="number" name="guests" min="1" max="9" placeholder="Количество гостей" required>
           </div>
           <div class="form__row">
-            <textarea name="comment" rows="3" placeholder="Комментарий (даты, баня, вопросы)"></textarea>
+            <textarea name="comment" rows="3" placeholder="Комментарий (баня, вопросы)"></textarea>
           </div>
           <button type="submit" class="btn btn--primary btn--full">Отправить заявку</button>
         </form>

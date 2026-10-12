@@ -134,7 +134,6 @@ document.addEventListener('DOMContentLoaded', function () {
   // ===== 7. ВАЛИДАЦИЯ И ОТПРАВКА ФОРМЫ В TELEGRAM =====
   const form = document.getElementById('booking-form');
   if (form) {
-    // Маска для телефона
     const phoneInput = form.querySelector('input[name="phone"]');
     if (phoneInput) {
       phoneInput.addEventListener('input', function () {
@@ -147,39 +146,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
       const name = form.querySelector('input[name="name"]').value.trim();
       const phone = form.querySelector('input[name="phone"]').value.trim();
-      const checkin = form.querySelector('input[name="checkin"]').value;
-      const checkout = form.querySelector('input[name="checkout"]').value;
+      const dates = form.querySelector('input[name="dates"]').value.trim();
       const guests = form.querySelector('input[name="guests"]').value;
       const comment = form.querySelector('textarea[name="comment"]').value.trim();
 
-      // Валидация
-      if (name.length < 2) {
-        alert('Пожалуйста, введите ваше имя.');
-        return;
-      }
-
+      if (name.length < 2) { alert('Пожалуйста, введите ваше имя.'); return; }
       const phoneDigits = phone.replace(/\D/g, '');
-      if (phoneDigits.length < 7) {
-        alert('Пожалуйста, введите корректный номер телефона.');
-        return;
-      }
-
-      if (!checkin || !checkout) {
-        alert('Пожалуйста, выберите даты заезда и выезда.');
-        return;
-      }
-
-      if (new Date(checkout) <= new Date(checkin)) {
-        alert('Дата выезда должна быть позже даты заезда.');
-        return;
-      }
-
+      if (phoneDigits.length < 7) { alert('Пожалуйста, введите корректный номер телефона.'); return; }
+      if (!dates || dates.length < 3) { alert('Пожалуйста, укажите даты заезда и выезда.'); return; }
       if (!guests || parseInt(guests, 10) < 1 || parseInt(guests, 10) > 9) {
-        alert('Укажите количество гостей от 1 до 9.');
-        return;
+        alert('Укажите количество гостей от 1 до 9.'); return;
       }
 
-      // Отправка
       const submitBtn = form.querySelector('button[type="submit"]');
       const originalText = submitBtn.textContent;
       submitBtn.disabled = true;
@@ -189,9 +167,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const response = await fetch('/.netlify/functions/send', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, phone, checkin, checkout, guests, comment })
+          body: JSON.stringify({ name, phone, dates, guests, comment })
         });
-
         const result = await response.json();
 
         if (response.ok && result.ok) {
@@ -199,11 +176,9 @@ document.addEventListener('DOMContentLoaded', function () {
           form.reset();
         } else {
           alert('Ошибка отправки. Пожалуйста, позвоните по телефону.');
-          console.error('Server error:', result);
         }
       } catch (err) {
         alert('Не удалось отправить заявку. Пожалуйста, позвоните по телефону.');
-        console.error('Network error:', err);
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = originalText;
@@ -235,6 +210,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // ===== ЛОГ В КОНСОЛЬ =====
   console.log('%c🏡 Дом на сутки · Орша', 'font-size:18px; color:#c66a3f; font-weight:bold;');
-  console.log('%cСайт готов. Удачи!', 'font-size:12px; color:#7a6f65;');
 
 });

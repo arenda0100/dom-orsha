@@ -6,7 +6,7 @@ exports.handler = async (event) => {
 
   try {
     const data = JSON.parse(event.body);
-    const { name, phone, checkin, checkout, guests, comment } = data;
+    const { name, phone, dates, guests, comment } = data;
 
     if (!name || !phone) {
       return { statusCode: 400, body: JSON.stringify({ error: 'Имя и телефон обязательны' }) };
@@ -21,8 +21,7 @@ exports.handler = async (event) => {
       '',
       '👤 Имя: ' + name,
       '📞 Телефон: ' + phone,
-      '📅 Заезд: ' + (checkin || '—'),
-      '📅 Выезд: ' + (checkout || '—'),
+      '📅 Даты: ' + (dates || '—'),
       '👥 Гостей: ' + (guests || '—'),
       '💬 Комментарий: ' + (comment || '—'),
       '',
