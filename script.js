@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }, { passive: true });
   }
 
-  // ===== 7. ВАЛИДАЦИЯ ФОРМЫ =====
+  // ===== 7. ВАЛИДАЦИЯ И ОТПРАВКА ФОРМЫ В TELEGRAM =====
   const form = document.getElementById('booking-form');
   if (form) {
     // Маска для телефона
@@ -142,8 +142,7 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
-    // Отправка
-    form.addEventListener('submit', function (e) {
+    form.addEventListener('submit', async function (e) {
       e.preventDefault();
 
       const name = form.querySelector('input[name="name"]').value.trim();
@@ -151,21 +150,20 @@ document.addEventListener('DOMContentLoaded', function () {
       const checkin = form.querySelector('input[name="checkin"]').value;
       const checkout = form.querySelector('input[name="checkout"]').value;
       const guests = form.querySelector('input[name="guests"]').value;
+      const comment = form.querySelector('textarea[name="comment"]').value.trim();
 
-      // Проверка имени
+      // Валидация
       if (name.length < 2) {
         alert('Пожалуйста, введите ваше имя.');
         return;
       }
 
-      // Проверка телефона
       const phoneDigits = phone.replace(/\D/g, '');
       if (phoneDigits.length < 7) {
         alert('Пожалуйста, введите корректный номер телефона.');
         return;
       }
 
-      // Проверка дат
       if (!checkin || !checkout) {
         alert('Пожалуйста, выберите даты заезда и выезда.');
         return;
@@ -176,30 +174,41 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
-      // Проверка гостей
       if (!guests || parseInt(guests, 10) < 1 || parseInt(guests, 10) > 9) {
         alert('Укажите количество гостей от 1 до 9.');
         return;
       }
 
-      // Успех
-      alert('Заявка отправлена! Мы свяжемся с вами в ближайшее время.');
-      form.reset();
-    });
+      // Отправка
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Отправляем...';
 
-    // Защита от двойного клика
-    const submitBtn = form.querySelector('button[type="submit"]');
-    if (submitBtn) {
-      form.addEventListener('submit', function () {
-        submitBtn.disabled = true;
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = 'Отправляем...';
-        setTimeout(function () {
-          submitBtn.disabled = false;
-          submitBtn.textContent = originalText;
-        }, 1200);
-      });
-    }
+      try {
+        const response = await fetch('/.netlify/functions/send', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, phone, checkin, checkout, guests, comment })
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.ok) {
+          alert('Заявка отправлена! Мы свяжемся с вами в ближайшее время.');
+          form.reset();
+        } else {
+          alert('Ошибка отправки. Пожалуйста, позвоните по телефону.');
+          console.error('Server error:', result);
+        }
+      } catch (err) {
+        alert('Не удалось отправить заявку. Пожалуйста, позвоните по телефону.');
+        console.error('Network error:', err);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
+    });
   }
 
   // ===== 8. ПОДСВЕТКА АКТИВНОГО ПУНКТА МЕНЮ =====
@@ -223,18 +232,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     sections.forEach(function (s) { sectionObserver.observe(s); });
   }
-
-  // ===== 9. ПУЛЬСАЦИЯ ЦИФР (мягкое свечение) =====
-  const statNums = document.querySelectorAll('.stat__num');
-  statNums.forEach(function (num, i) {
-    num.style.transition = 'text-shadow 0.6s ease';
-    setTimeout(function () {
-      num.style.textShadow = '0 0 20px rgba(198, 106, 63, 0.3)';
-      setTimeout(function () {
-        num.style.textShadow = 'none';
-      }, 800);
-    }, 1000 + i * 200);
-  });
 
   // ===== ЛОГ В КОНСОЛЬ =====
   console.log('%c🏡 Дом на сутки · Орша', 'font-size:18px; color:#c66a3f; font-weight:bold;');
