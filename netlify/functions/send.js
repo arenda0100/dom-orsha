@@ -13,7 +13,7 @@ exports.handler = async (event) => {
     }
 
     // ↓↓↓ ТОКЕН БОТА И CHAT_ID СВЕТЛАНЫ ↓↓↓
-    const TOKEN = '8903861291:AAFbNvqpwyXsAl2YpNXKMoFICvVcPaRVNJQ';
+    const TOKEN = '8903861291:AAE7TcM5t7JTiXa_NCUa5pDa6imaqwC8BgE';
     const CHAT_ID = '5295893096';
 
     const message = [
