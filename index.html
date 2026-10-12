@@ -25,9 +25,9 @@
       <nav class="nav" id="nav">
         <ul class="nav__list">
           <li><a href="#about" class="nav__link">О доме</a></li>
+          <li><a href="#gallery" class="nav__link">Фото</a></li>
           <li><a href="#features" class="nav__link">Удобства</a></li>
           <li><a href="#banya" class="nav__link">Баня</a></li>
-          <li><a href="#conditions" class="nav__link">Условия</a></li>
           <li><a href="#contacts" class="nav__link">Контакты</a></li>
         </ul>
       </nav>
@@ -38,20 +38,19 @@
     </div>
   </header>
 
-  <!-- ===== 2. HERO ===== -->
-  <section class="hero" id="hero">
-    <div class="hero__decor hero__decor--1"></div>
-    <div class="hero__decor hero__decor--2"></div>
-    <div class="hero__decor hero__decor--3"></div>
+  <!-- ===== 2. HERO С ФОТО ДОМА ===== -->
+  <section class="hero hero--photo" id="hero">
+    <div class="hero__bg" style="background-image: url('images/hero.jpg');"></div>
+    <div class="hero__overlay"></div>
 
     <div class="container hero__inner">
       <p class="hero__eyebrow">Оршанский район · Беларусь</p>
-      <h1 class="hero__title">Уютный<br>светлый дом<br><em>в Орше</em></h1>
+     <h1 class="hero__title"><span class="hero__brand">SvAlex</span><br><span class="hero__brand-2">house</span><br><em>в Орше</em></h1>
       <p class="hero__subtitle">Для семей, компаний и командировок</p>
       <p class="hero__text">Тихое место, где городская суета растворяется в природе. Дом полностью оборудован для комфортного проживания.</p>
       <div class="hero__actions">
         <a href="#contacts" class="btn btn--primary">Забронировать</a>
-        <a href="#about" class="btn btn--ghost">Смотреть дом</a>
+        <a href="#gallery" class="btn btn--ghost">Смотреть фото</a>
       </div>
       <div class="hero__badges">
         <span class="badge">📶 Wi-Fi</span>
@@ -88,7 +87,7 @@
     </div>
   </div>
 
-  <!-- ===== 4. О ДОМЕ ===== -->
+  <!-- ===== 4. О ДОМЕ С ФОТО ===== -->
   <section class="about reveal" id="about">
     <div class="container about__inner">
       <div class="about__left">
@@ -99,27 +98,87 @@
         <p class="about__text">Дом расположен в тихом месте: до центра Орши — 3 км, от границы с РФ — 40 км. Идеально для семейного отдыха и командировок.</p>
         <p class="about__hand">Тихо, тепло, по-домашнему ✨</p>
       </div>
-      <div class="about__right">
-        <div class="stat">
-          <div class="stat__num" data-count="9">0</div>
-          <div class="stat__label">гостей<br>максимум</div>
+      <div class="about__right about__right--photos">
+        <div class="about__photo reveal">
+          <img src="images/about-1.jpg" alt="Гостиная" loading="lazy">
         </div>
-        <div class="stat">
-          <div class="stat__num" data-count="4">0</div>
-          <div class="stat__label">спальни<br>и 2 санузла</div>
-        </div>
-        <div class="stat">
-          <div class="stat__num" data-count="120">0</div>
-          <div class="stat__label">м² общая<br>площадь</div>
-        </div>
-        <div class="stat">
-          <div class="stat__num" data-count="12">0</div>
-          <div class="stat__label">соток<br>территории</div>
+        <div class="about__photo reveal">
+          <img src="images/about-2.jpg" alt="Кухня-гостиная" loading="lazy">
         </div>
       </div>
     </div>
   </section>
+  <!-- ===== ЗОЛОТАЯ БЕГУЩАЯ ЛЕНТА ===== -->
+  <div class="gold-marquee">
+    <div class="gold-marquee__track">
+      <span>Тепло</span><span class="gold-dot">✦</span>
+      <span>Уютно</span><span class="gold-dot">✦</span>
+      <span>По-домашнему</span><span class="gold-dot">✦</span>
+      <span>Для семьи</span><span class="gold-dot">✦</span>
+      <span>Для друзей</span><span class="gold-dot">✦</span>
+      <span>Для отдыха</span><span class="gold-dot">✦</span>
+      <span>Тепло</span><span class="gold-dot">✦</span>
+      <span>Уютно</span><span class="gold-dot">✦</span>
+      <span>По-домашнему</span><span class="gold-dot">✦</span>
+      <span>Для семьи</span><span class="gold-dot">✦</span>
+      <span>Для друзей</span><span class="gold-dot">✦</span>
+      <span>Для отдыха</span><span class="gold-dot">✦</span>
+    </div>
+  </div>
+<!-- ===== 4.5. ГАЛЕРЕЯ ФОТО ДОМА ===== -->
+  <section class="gallery reveal" id="gallery">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Фото дома</p>
+        <h2 class="section-title">Загляните внутрь</h2>
+        <div class="divider divider--center"></div>
+      </div>
 
+      <div class="gallery__grid">
+        <div class="gallery__item gallery__item--big reveal">
+          <img src="images/about-2.jpg" alt="Кухня-гостиная" loading="lazy">
+        </div>
+        <div class="gallery__item reveal">
+          <img src="images/about-1.jpg" alt="Гостиная" loading="lazy">
+        </div>
+        <div class="gallery__item reveal">
+          <img src="images/kitchen.jpg" alt="Кухня" loading="lazy">
+        </div>
+        <div class="gallery__item reveal">
+          <img src="images/dining.jpg" alt="Столовая" loading="lazy">
+        </div>
+        <div class="gallery__item reveal">
+          <img src="images/bedroom-1.jpg" alt="Спальня" loading="lazy">
+        </div>
+        <div class="gallery__item reveal">
+          <img src="images/bedroom-2.jpg" alt="Комната с диваном" loading="lazy">
+        </div>
+        <div class="gallery__item reveal">
+          <img src="images/bathroom.jpg" alt="Ванная" loading="lazy">
+        </div>
+        <div class="gallery__item reveal">
+          <img src="images/stairs.jpg" alt="Лестница" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== ТЕРРАКОТОВАЯ БЕГУЩАЯ ЛЕНТА ===== -->
+  <div class="terra-marquee">
+    <div class="terra-marquee__track">
+      <span>Светло</span><span class="terra-dot">◆</span>
+      <span>Просторно</span><span class="terra-dot">◆</span>
+      <span>Чисто</span><span class="terra-dot">◆</span>
+      <span>Комфортно</span><span class="terra-dot">◆</span>
+      <span>Спокойно</span><span class="terra-dot">◆</span>
+      <span>Уютно</span><span class="terra-dot">◆</span>
+      <span>Светло</span><span class="terra-dot">◆</span>
+      <span>Просторно</span><span class="terra-dot">◆</span>
+      <span>Чисто</span><span class="terra-dot">◆</span>
+      <span>Комфортно</span><span class="terra-dot">◆</span>
+      <span>Спокойно</span><span class="terra-dot">◆</span>
+      <span>Уютно</span><span class="terra-dot">◆</span>
+    </div>
+  </div>
   <!-- ===== 5. ЧТО ВНУТРИ ===== -->
   <section class="features reveal" id="features">
     <div class="container">
@@ -292,6 +351,7 @@
         <h2 class="section-title">Мы на карте</h2>
         <div class="divider divider--center"></div>
       </div>
+
       <div class="map__wrapper">
         <iframe
           class="map__iframe"
@@ -301,6 +361,7 @@
           loading="lazy">
         </iframe>
       </div>
+
       <div class="map__actions">
         <a href="https://yandex.by/maps/?rtext=~54.545,30.331&rtt=auto" target="_blank" rel="noopener" class="btn btn--primary">
           🚗 Построить маршрут
