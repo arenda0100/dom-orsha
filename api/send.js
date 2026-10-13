@@ -1,15 +1,14 @@
-// Netlify Function — приём заявки и отправка в Telegram
-exports.handler = async (event) => {
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method Not Allowed' };
+// Vercel Function — приём заявки и отправка в Telegram
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
   try {
-    const data = JSON.parse(event.body);
-    const { name, phone, dates, guests, comment } = data;
+    const { name, phone, dates, guests, comment } = req.body;
 
     if (!name || !phone) {
-      return { statusCode: 400, body: JSON.stringify({ error: 'Имя и телефон обязательны' }) };
+      return res.status(400).json({ error: 'Имя и телефон обязательны' });
     }
 
     // ↓↓↓ ТОКЕН БОТА И CHAT_ID СВЕТЛАНЫ ↓↓↓
@@ -17,7 +16,7 @@ exports.handler = async (event) => {
     const CHAT_ID = '5295893096';
 
     const message = [
-      '🏡 НОВАЯ ЗАЯВКА — Дом на сутки',
+      '🏡 НОВАЯ ЗАЯВКА — SvAleks house',
       '',
       '👤 Имя: ' + name,
       '📞 Телефон: ' + phone,
@@ -43,13 +42,13 @@ exports.handler = async (event) => {
 
     if (!result.ok) {
       console.error('Telegram error:', result);
-      return { statusCode: 500, body: JSON.stringify({ error: result.description }) };
+      return res.status(500).json({ error: result.description });
     }
 
-    return { statusCode: 200, body: JSON.stringify({ ok: true }) };
+    return res.status(200).json({ ok: true });
 
   } catch (err) {
     console.error('Error:', err);
-    return { statusCode: 500, body: JSON.stringify({ error: 'Server error' }) };
+    return res.status(500).json({ error: 'Server error' });
   }
-};
+}
