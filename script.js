@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }, { passive: true });
   }
 
-  // ===== 7. ВАЛИДАЦИЯ И ОТПРАВКА ФОРМЫ В TELEGRAM =====
+  // ===== 7. ВАЛИДАЦИЯ И ОТПРАВКА ФОРМЫ =====
   const form = document.getElementById('booking-form');
   if (form) {
     const phoneInput = form.querySelector('input[name="phone"]');
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function () {
       submitBtn.textContent = 'Отправляем...';
 
       try {
-        const response = await fetch('/.netlify/functions/send', {
+        const response = await fetch('/api/send', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ name, phone, dates, guests, comment })
@@ -208,10 +208,7 @@ document.addEventListener('DOMContentLoaded', function () {
     sections.forEach(function (s) { sectionObserver.observe(s); });
   }
 
-  // ===== ЛОГ В КОНСОЛЬ =====
-  console.log('%c🏡 Дом на сутки · Орша', 'font-size:18px; color:#c66a3f; font-weight:bold;');
-// ===== 9. ЛАЙТБОКС ДЛЯ СЕКЦИИ «ТЕРРИТОРИЯ» =====
-  const territoryCard = document.getElementById('territory-card');
+  // ===== 9-10. УНИВЕРСАЛЬНЫЙ ЛАЙТБОКС (для «Территории» и «Дома снаружи») =====
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
   const lightboxCaption = document.getElementById('lightbox-caption');
@@ -219,17 +216,29 @@ document.addEventListener('DOMContentLoaded', function () {
   const lightboxPrev = document.getElementById('lightbox-prev');
   const lightboxNext = document.getElementById('lightbox-next');
 
-  if (territoryCard && lightbox) {
-    const photos = [
-      { src: 'images/territory-1.jpg', caption: 'Розы и сад' },
-      { src: 'images/territory-2.jpg', caption: 'Пруд с фонтаном' },
-      { src: 'images/territory-3.jpg', caption: 'Двор и въезд' },
-      { src: 'images/territory-4.jpg', caption: 'Уголок отдыха' }
-    ];
+  if (lightbox) {
+    // Все фото с разных карточек
+    const galleries = {
+      territory: [
+        { src: 'images/territory-1.jpg', caption: 'Розы и сад' },
+        { src: 'images/territory-2.jpg', caption: 'Пруд с фонтаном' },
+        { src: 'images/territory-3.jpg', caption: 'Усадьба' },
+        { src: 'images/territory-4.jpg', caption: 'Уголок отдыха' }
+      ],
+      outside: [
+        { src: 'images/outside-1.jpg', caption: 'Фасад' },
+        { src: 'images/outside-2.jpg', caption: 'Просторный двор' },
+        { src: 'images/outside-3.jpg', caption: 'Крыльцо' },
+        { src: 'images/outside-4.jpg', caption: 'Беседка рядом' }
+      ]
+    };
+
+    let currentPhotos = [];
     let currentIndex = 0;
 
-    function openLightbox(index) {
-      currentIndex = index;
+    function openGallery(galleryKey) {
+      currentPhotos = galleries[galleryKey] || [];
+      currentIndex = 0;
       showPhoto();
       lightbox.classList.add('lightbox--open');
       document.body.style.overflow = 'hidden';
@@ -241,26 +250,37 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function showPhoto() {
-      const photo = photos[currentIndex];
+      const photo = currentPhotos[currentIndex];
+      if (!photo) return;
       lightboxImg.src = photo.src;
       lightboxImg.alt = photo.caption;
       lightboxCaption.textContent = photo.caption;
     }
 
     function nextPhoto() {
-      currentIndex = (currentIndex + 1) % photos.length;
+      if (!currentPhotos.length) return;
+      currentIndex = (currentIndex + 1) % currentPhotos.length;
       showPhoto();
     }
 
     function prevPhoto() {
-      currentIndex = (currentIndex - 1 + photos.length) % photos.length;
+      if (!currentPhotos.length) return;
+      currentIndex = (currentIndex - 1 + currentPhotos.length) % currentPhotos.length;
       showPhoto();
     }
 
-    territoryCard.addEventListener('click', function () {
-      openLightbox(0);
-    });
+    // Привязка карточек
+    const territoryCard = document.getElementById('territory-card');
+    const outsideCard = document.getElementById('outside-card');
 
+    if (territoryCard) {
+      territoryCard.addEventListener('click', function () { openGallery('territory'); });
+    }
+    if (outsideCard) {
+      outsideCard.addEventListener('click', function () { openGallery('outside'); });
+    }
+
+    // Кнопки и клавиатура
     lightboxClose.addEventListener('click', closeLightbox);
     lightboxNext.addEventListener('click', nextPhoto);
     lightboxPrev.addEventListener('click', prevPhoto);
@@ -276,6 +296,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (e.key === 'ArrowLeft') prevPhoto();
     });
 
+    // Свайп
     let touchStartX = 0;
     lightbox.addEventListener('touchstart', function (e) {
       touchStartX = e.changedTouches[0].screenX;
@@ -290,4 +311,8 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
+  // ===== ЛОГ В КОНСОЛЬ =====
+  console.log('%c🏡 SvAleks house', 'font-size:18px; color:#c66a3f; font-weight:bold;');
+  console.log('%cСайт готов. Удачи!', 'font-size:12px; color:#7a6f65;');
+
 });
