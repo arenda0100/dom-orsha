@@ -219,11 +219,12 @@ document.addEventListener('DOMContentLoaded', function () {
   if (lightbox) {
     // Все фото с разных карточек
     const galleries = {
-      territory: [
+     territory: [
         { src: 'images/territory-1.jpg', caption: 'Розы и сад' },
-        { src: 'images/territory-2.jpg', caption: 'Пруд с фонтаном' },
+        { src: 'images/territory-2.jpg', caption: 'Скульптуры у пруда' },
         { src: 'images/territory-3.jpg', caption: 'Усадьба' },
-        { src: 'images/territory-4.jpg', caption: 'Уголок отдыха' }
+        { src: 'images/territory-4.jpg', caption: 'Уголок отдыха' },
+        { src: 'images/territory-5.jpg', caption: 'Пруд с фонтаном' }
       ],
       outside: [
         { src: 'images/outside-1.jpg', caption: 'Фасад' },

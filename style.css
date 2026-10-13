@@ -2059,3 +2059,19 @@ cond:nth-child(2)::before { background: linear-gradient(135deg, var(--wood), var
     grid-template-columns: 1fr;
   }
 }
+/* ===== Территория — 5 подписей (3 в ряд) ===== */
+.territory__descriptions {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 1000px) {
+  .territory__descriptions {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .territory__descriptions {
+    grid-template-columns: 1fr;
+  }
+}
