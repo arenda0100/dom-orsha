@@ -210,5 +210,84 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // ===== ЛОГ В КОНСОЛЬ =====
   console.log('%c🏡 Дом на сутки · Орша', 'font-size:18px; color:#c66a3f; font-weight:bold;');
+// ===== 9. ЛАЙТБОКС ДЛЯ СЕКЦИИ «ТЕРРИТОРИЯ» =====
+  const territoryCard = document.getElementById('territory-card');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const lightboxClose = document.getElementById('lightbox-close');
+  const lightboxPrev = document.getElementById('lightbox-prev');
+  const lightboxNext = document.getElementById('lightbox-next');
 
+  if (territoryCard && lightbox) {
+    const photos = [
+      { src: 'images/territory-1.jpg', caption: 'Розы и сад' },
+      { src: 'images/territory-2.jpg', caption: 'Пруд с фонтаном' },
+      { src: 'images/territory-3.jpg', caption: 'Двор и въезд' },
+      { src: 'images/territory-4.jpg', caption: 'Уголок отдыха' }
+    ];
+    let currentIndex = 0;
+
+    function openLightbox(index) {
+      currentIndex = index;
+      showPhoto();
+      lightbox.classList.add('lightbox--open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('lightbox--open');
+      document.body.style.overflow = '';
+    }
+
+    function showPhoto() {
+      const photo = photos[currentIndex];
+      lightboxImg.src = photo.src;
+      lightboxImg.alt = photo.caption;
+      lightboxCaption.textContent = photo.caption;
+    }
+
+    function nextPhoto() {
+      currentIndex = (currentIndex + 1) % photos.length;
+      showPhoto();
+    }
+
+    function prevPhoto() {
+      currentIndex = (currentIndex - 1 + photos.length) % photos.length;
+      showPhoto();
+    }
+
+    territoryCard.addEventListener('click', function () {
+      openLightbox(0);
+    });
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxNext.addEventListener('click', nextPhoto);
+    lightboxPrev.addEventListener('click', prevPhoto);
+
+    lightbox.addEventListener('click', function (e) {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (!lightbox.classList.contains('lightbox--open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') nextPhoto();
+      if (e.key === 'ArrowLeft') prevPhoto();
+    });
+
+    let touchStartX = 0;
+    lightbox.addEventListener('touchstart', function (e) {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    lightbox.addEventListener('touchend', function (e) {
+      const touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) nextPhoto();
+        else prevPhoto();
+      }
+    });
+  }
 });
