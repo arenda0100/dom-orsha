@@ -230,12 +230,17 @@ document.addEventListener('DOMContentLoaded', function () {
         { src: 'images/outside-2.jpg', caption: 'Просторный двор' },
         { src: 'images/outside-3.jpg', caption: 'Крыльцо' },
         { src: 'images/outside-4.jpg', caption: 'Беседка рядом' }
-      ]
+      ],
+      banya: [
+      { src: 'images/banya-3.jpg', caption: 'комната отдыха' },
+      { src: 'images/banya-4.jpg', caption: 'парилка' },
+      { src: 'images/banya-5.jpg', caption: 'Комната с душем' },
+      { src: 'images/banya-6.jpg', caption: 'душевая' }
+    ]
     };
 
     let currentPhotos = [];
     let currentIndex = 0;
-
     function openGallery(galleryKey) {
       currentPhotos = galleries[galleryKey] || [];
       currentIndex = 0;
@@ -272,6 +277,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Привязка карточек
     const territoryCard = document.getElementById('territory-card');
     const outsideCard = document.getElementById('outside-card');
+    const banyaCard = document.getElementById('banya-card');
 
     if (territoryCard) {
       territoryCard.addEventListener('click', function () { openGallery('territory'); });
@@ -279,6 +285,9 @@ document.addEventListener('DOMContentLoaded', function () {
     if (outsideCard) {
       outsideCard.addEventListener('click', function () { openGallery('outside'); });
     }
+    if (banyaCard) {
+  banyaCard.addEventListener('click', function () { openGallery('banya'); });
+}
 
     // Кнопки и клавиатура
     lightboxClose.addEventListener('click', closeLightbox);

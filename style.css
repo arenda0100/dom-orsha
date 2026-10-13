@@ -697,29 +697,9 @@ input, textarea { font-family: inherit; font-size: inherit; }
   gap: 64px;
   align-items: start;
 }
-.banya-photos__imgs {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  align-self: start;
-  max-width: 380px;
-}
-.banya-photos__img {
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: 0 12px 32px rgba(45, 37, 32, 0.12);
-  transition: var(--transition);
-  aspect-ratio: 3 / 4;
-}
 .banya-photos__img:hover {
   transform: translateY(-6px);
   box-shadow: 0 24px 56px rgba(198, 106, 63, 0.25);
-}
-.banya-photos__img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.8s ease;
 }
 .banya-photos__img:hover img { transform: scale(1.05); }
 
@@ -1846,4 +1826,220 @@ cond:nth-child(2)::before { background: linear-gradient(135deg, var(--wood), var
   .outside-desc { padding: 20px; }
   .outside-desc__title--cormorant { font-size: 22px; }
   .outside__intro { font-size: 17px; }
+}
+/* ======================================================= */
+/* ===== СЕКЦИЯ «БАНЯ С ФОТО» — НОВЫЕ СТИЛИ ===== */
+/* ======================================================= */
+
+.banya-photos__intro {
+  max-width: 640px;
+  margin: 24px auto 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-style: italic;
+  color: var(--text-dim);
+  line-height: 1.6;
+  text-align: center;
+}
+
+.banya-card {
+  background: var(--bg-alt);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(45, 37, 32, 0.08);
+  transition: var(--transition);
+  cursor: pointer;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  margin: 0 auto 48px;
+  max-width: 1000px;
+}
+
+.banya-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  padding: 2px;
+  background: linear-gradient(135deg, var(--terracotta), var(--sand), var(--wood));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.5;
+  transition: var(--transition);
+  z-index: 2;
+}
+
+.banya-card:hover::before { opacity: 1; }
+.banya-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 56px rgba(198, 106, 63, 0.25);
+}
+
+.banya-card__img {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--bg-soft);
+}
+
+.banya-card__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.banya-card:hover .banya-card__img img { transform: scale(1.08); }
+
+.banya-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 4, 9, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: var(--transition);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.banya-card:hover .banya-card__overlay { opacity: 1; }
+
+.banya-card__view {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  padding: 16px 28px;
+  border: 2px solid #fff;
+  border-radius: 100px;
+  letter-spacing: 0.05em;
+  transition: var(--transition);
+  text-align: center;
+}
+
+.banya-card:hover .banya-card__view {
+  background: #fff;
+  color: var(--terracotta);
+}
+
+.banya-card__body {
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(160deg, var(--bg-alt) 0%, var(--bg-soft) 100%);
+}
+
+.banya-card__num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--terracotta);
+  letter-spacing: 0.25em;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.banya-card__title {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 16px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.banya-card__text {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+}
+
+.banya-card__hand {
+  font-family: 'Caveat', cursive;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--terracotta);
+  line-height: 1.2;
+}
+
+.banya__descriptions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto 48px;
+}
+
+.banya-desc {
+  padding: 24px;
+  border-left: 2px solid var(--terracotta);
+  background: linear-gradient(90deg, rgba(198, 106, 63, 0.05), transparent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.banya-desc__num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 12px;
+  font-style: italic;
+  color: var(--terracotta);
+  letter-spacing: 0.2em;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.banya-desc__title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.banya-desc__title--unbounded { font-family: 'Unbounded', sans-serif; }
+
+.banya-desc__title--cormorant {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 24px;
+}
+.banya-desc__text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.banya-desc__hand {
+  font-family: 'Caveat', cursive;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--terracotta);
+  line-height: 1.2;
+}
+
+@media (max-width: 1000px) {
+  .banya-card { grid-template-columns: 1fr; }
+  .banya__descriptions { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .banya-photos { padding: 80px 0; }
+  .banya-card__body { padding: 32px 24px; }
+  .banya-card__title { font-size: 22px; }
+  .banya__descriptions { grid-template-columns: 1fr; gap: 16px; }
+  .banya-desc { padding: 20px; }
+  .banya-desc__title--cormorant { font-size: 22px; }
+  .banya-photos__intro { font-size: 17px; }
+  .steam-marquee { margin-top: 32px; }
 }
