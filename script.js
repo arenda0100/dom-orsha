@@ -232,11 +232,13 @@ document.addEventListener('DOMContentLoaded', function () {
         { src: 'images/outside-4.jpg', caption: 'Беседка рядом' }
       ],
       banya: [
-      { src: 'images/banya-3.jpg', caption: 'комната отдыха' },
-      { src: 'images/banya-4.jpg', caption: 'парилка' },
-      { src: 'images/banya-5.jpg', caption: 'Комната с душем' },
-      { src: 'images/banya-6.jpg', caption: 'душевая' }
-    ]
+        { src: 'images/banya-3.jpg', caption: 'Комната отдыха' },
+        { src: 'images/banya-4.jpg', caption: 'парилка' },
+        { src: 'images/banya-5.jpg', caption: 'комната с душем' },
+        { src: 'images/banya-6.jpg', caption: 'Душевая' },
+        { src: 'images/banya-7.jpg', caption: 'Комната с ТВ' },
+        { src: 'images/banya-8.jpg', caption: 'Санузел' }
+      ]
     };
 
     let currentPhotos = [];

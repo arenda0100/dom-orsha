@@ -2043,3 +2043,19 @@ cond:nth-child(2)::before { background: linear-gradient(135deg, var(--wood), var
   .banya-photos__intro { font-size: 17px; }
   .steam-marquee { margin-top: 32px; }
 }
+/* ===== Баня — сетка подписей на 6 элементов (3 в ряд) ===== */
+.banya__descriptions {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 1000px) {
+  .banya__descriptions {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .banya__descriptions {
+    grid-template-columns: 1fr;
+  }
+}
