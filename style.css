@@ -1902,3 +1902,303 @@ input, textarea { font-family: inherit; font-size: inherit; }
     max-width: 100%;
   }
 }
+/* ======================================================= */
+/* ===== БАНЯ — СНОВА 3 КАРТОЧКИ ===== */
+/* ======================================================= */
+
+.banya__grid {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 100%;
+  margin: 0;
+}
+
+@media (max-width: 1000px) {
+  .banya__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .banya__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ======================================================= */
+/* ===== СЕКЦИЯ «БАНЯ» — ФОТО + ТЕКСТЫ ===== */
+/* ======================================================= */
+
+.banya-photos {
+  padding: 120px 0;
+  background: var(--bg);
+}
+
+.banya-photos__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.banya-photos__imgs {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  align-self: start;
+  max-width: 380px;
+}
+
+.banya-photos__img {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(45, 37, 32, 0.12);
+  transition: var(--transition);
+  aspect-ratio: 3 / 4;
+  background: var(--bg-soft);
+  padding: 8px;
+}
+
+.banya-photos__img:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 56px rgba(198, 106, 63, 0.25);
+}
+
+.banya-photos__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: calc(var(--radius) - 4px);
+  transition: transform 0.8s ease;
+}
+
+.banya-photos__img:hover img {
+  transform: scale(1.05);
+}
+
+.banya-photos__texts {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.banya-block {
+  padding: 32px 0 32px 32px;
+  border-left: 3px solid var(--terracotta);
+  position: relative;
+}
+
+.banya-block::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 32px;
+  width: 13px;
+  height: 13px;
+  background: var(--terracotta);
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(198, 106, 63, 0.4);
+}
+
+.banya-block__num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 700;
+  color: var(--terracotta);
+  letter-spacing: 0.3em;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.banya-block__title {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 16px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.banya-block:nth-child(2) .banya-block__title {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 38px;
+}
+
+.banya-block__desc {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+}
+
+.banya-block__hand {
+  font-family: 'Caveat', cursive;
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--terracotta);
+  line-height: 1.2;
+}
+
+@media (max-width: 1000px) {
+  .banya-photos__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .banya-photos__imgs {
+    position: static;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .banya-photos__img {
+    aspect-ratio: 1 / 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .banya-photos {
+    padding: 80px 0;
+  }
+
+  .banya-photos__imgs {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .banya-photos__img {
+    aspect-ratio: 4 / 3;
+  }
+
+  .banya-block {
+    padding: 24px 0 24px 24px;
+  }
+
+  .banya-block__title {
+    font-size: 24px;
+  }
+
+  .banya-block:nth-child(2) .banya-block__title {
+    font-size: 28px;
+  }
+
+  .banya-block__desc {
+    font-size: 15px;
+  }
+
+  .banya-block__hand {
+    font-size: 22px;
+  }
+}
+/* ======================================================= */
+/* ===== ЛЕНТА «БАНЯ» — ТЁМНАЯ, С ПАРОМ ===== */
+/* ======================================================= */
+
+.steam-marquee {
+  overflow: hidden;
+  margin-top: 56px;
+  padding: 20px 0;
+  background: linear-gradient(90deg, #1a0409 0%, #2a060f 50%, #1a0409 100%);
+  border-radius: var(--radius-sm);
+  position: relative;
+  /* Размытие краёв — эффект пара */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 15%, #000 85%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0%, #000 15%, #000 85%, transparent 100%);
+}
+
+/* Внутреннее свечение — как пар */
+.steam-marquee::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(212, 165, 116, 0.15), transparent 70%);
+  pointer-events: none;
+  animation: steamGlow 5s ease-in-out infinite;
+}
+
+.steam-marquee__track {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  white-space: nowrap;
+  /* Медленнее остальных — 60 секунд */
+  animation: steamMarquee 60s linear infinite;
+  position: relative;
+  z-index: 1;
+}
+
+.steam-marquee__track span {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: rgba(212, 165, 116, 0.75);
+  /* Мягкое покачивание — эффект пара */
+  animation: steamFade 4s ease-in-out infinite;
+}
+
+/* Каждая вторая надпись мерцает с задержкой — живой пар */
+.steam-marquee__track span:nth-child(4n) {
+  animation-delay: -1s;
+  opacity: 0.7;
+}
+
+.steam-marquee__track span:nth-child(4n+2) {
+  animation-delay: -2s;
+  opacity: 0.85;
+}
+
+/* Точки — тильда «~» как струйка пара */
+.steam-marquee__track .steam-dot {
+  font-family: 'Caveat', cursive;
+  font-size: 34px;
+  font-style: normal;
+  color: rgba(212, 165, 116, 0.5);
+  animation: steamRise 3s ease-in-out infinite;
+  display: inline-block;
+  letter-spacing: 0;
+}
+
+@keyframes steamMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes steamGlow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes steamFade {
+  0%, 100% { opacity: 0.75; }
+  50% { opacity: 1; }
+}
+
+@keyframes steamRise {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.5; }
+  50% { transform: translateY(-6px) scale(1.15); opacity: 0.9; }
+}
+
+/* ===== АДАПТИВ НА ТЕЛЕФОНЕ ===== */
+@media (max-width: 640px) {
+  .steam-marquee {
+    margin-top: 24px;
+    padding: 14px 0;
+  }
+
+  .steam-marquee__track {
+    gap: 18px;
+    animation-duration: 45s;
+  }
+
+  .steam-marquee__track span {
+    font-size: 18px;
+  }
+
+  .steam-marquee__track .steam-dot {
+    font-size: 22px;
+  }
+}
