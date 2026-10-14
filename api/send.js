@@ -16,7 +16,7 @@ export default async function handler(req, res) {
     const CHAT_ID = '5295893096';
 
     const message = [
-      '🏡 НОВАЯ ЗАЯВКА — SvAleks house',
+      '🏡 НОВАЯ ЗАЯВКА — svalex house',
       '',
       '👤 Имя: ' + name,
       '📞 Телефон: ' + phone,

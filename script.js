@@ -324,7 +324,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
   // ===== ЛОГ В КОНСОЛЬ =====
-  console.log('%c🏡 SvAleks house', 'font-size:18px; color:#c66a3f; font-weight:bold;');
+  console.log('%c🏡 svalex house', 'font-size:18px; color:#c66a3f; font-weight:bold;');
   console.log('%cСайт готов. Удачи!', 'font-size:12px; color:#7a6f65;');
 
 });
