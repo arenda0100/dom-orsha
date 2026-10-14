@@ -2075,3 +2075,383 @@ cond:nth-child(2)::before { background: linear-gradient(135deg, var(--wood), var
     grid-template-columns: 1fr;
   }
 }
+/* ======================================================= */
+/* ===== РАЗДЕЛ «СТОИМОСТЬ» — ЗОЛОТЫЕ КАРТОЧКИ ===== */
+/* ======================================================= */
+
+.pricing {
+  padding: 120px 0;
+  background: linear-gradient(180deg, #1a0409 0%, #2a060f 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Декоративные свечения на фоне */
+.pricing::before,
+.pricing::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.pricing::before {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(212, 165, 116, 0.15), transparent 70%);
+  top: -150px;
+  left: -150px;
+  filter: blur(80px);
+}
+.pricing::after {
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(198, 106, 63, 0.18), transparent 70%);
+  bottom: -120px;
+  right: -120px;
+  filter: blur(80px);
+}
+
+/* Заголовки секции — светлые */
+.pricing .section-title {
+  color: #f5efe6;
+}
+.pricing .section-title em {
+  color: #f0b48a;
+}
+.pricing .divider {
+  background: #d4a574;
+}
+.pricing .divider::before,
+.pricing .divider::after {
+  background: #d4a574;
+}
+.pricing .eyebrow {
+  color: #d4a574;
+}
+
+.pricing__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  align-items: start;
+  max-width: 1100px;
+  margin: 0 auto 56px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== Карточки цен — тёмные с золотом ===== */
+.price-card {
+  background: linear-gradient(160deg, #1f0a12 0%, #2a0e18 100%);
+  border-radius: var(--radius);
+  padding: 48px 32px 40px;
+  text-align: center;
+  transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: relative;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  overflow: hidden;
+}
+
+/* Золотая градиентная обводка */
+.price-card::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: calc(var(--radius) + 2px);
+  padding: 2px;
+  background: linear-gradient(135deg, #d4a574, #f0d29b, #c66a3f, #d4a574);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.7;
+  transition: var(--transition);
+}
+
+.price-card:hover::before {
+  opacity: 1;
+  background: linear-gradient(135deg, #f0d29b, #d4a574, #e08858, #f0d29b);
+}
+
+/* Внутреннее свечение при hover */
+.price-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(212, 165, 116, 0.15), transparent 60%);
+  pointer-events: none;
+  opacity: 0;
+  transition: var(--transition);
+}
+.price-card:hover::after {
+  opacity: 1;
+}
+
+/* Наклоны */
+.price-card--tilt-left {
+  transform: rotate(-3deg);
+}
+.price-card--tilt-left:hover {
+  transform: rotate(-3deg) translateY(-12px) scale(1.02);
+}
+
+.price-card--tilt-right {
+  transform: rotate(3deg);
+}
+.price-card--tilt-right:hover {
+  transform: rotate(3deg) translateY(-12px) scale(1.02);
+}
+
+/* Центральная — акцентная, чуть выше и ярче */
+.price-card--accent {
+  background: linear-gradient(160deg, #2a0e18 0%, #3a1520 100%);
+  transform: rotate(0deg) translateY(-20px);
+  padding: 60px 36px 48px;
+  z-index: 2;
+  box-shadow: 0 32px 80px rgba(198, 106, 63, 0.3);
+}
+.price-card--accent::before {
+  opacity: 1;
+  background: linear-gradient(135deg, #f0d29b, #d4a574, #e08858, #d4a574);
+}
+.price-card--accent:hover {
+  transform: rotate(0deg) translateY(-32px) scale(1.03);
+  box-shadow: 0 40px 96px rgba(212, 165, 116, 0.5);
+}
+
+/* Тег сверху */
+.price-card__tag {
+  display: inline-block;
+  padding: 8px 20px;
+  background: linear-gradient(135deg, #d4a574, #e8c9a0);
+  color: #2a060f;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  border-radius: 100px;
+  margin-bottom: 28px;
+  box-shadow: 0 8px 24px rgba(212, 165, 116, 0.3);
+}
+
+/* Иконка */
+.price-card__icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+  display: inline-block;
+  filter: drop-shadow(0 4px 16px rgba(212, 165, 116, 0.5));
+  transition: var(--transition);
+}
+.price-card:hover .price-card__icon {
+  transform: scale(1.15) rotate(-6deg);
+}
+
+/* Заголовок */
+.price-card__title {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #f5efe6;
+  margin-bottom: 20px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.price-card--accent .price-card__title {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 26px;
+  color: #f0d29b;
+}
+
+/* Декоративная линия с ромбиком */
+.price-card__divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  position: relative;
+  width: 100%;
+  max-width: 160px;
+}
+.price-card__divider::before,
+.price-card__divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #d4a574, transparent);
+}
+.price-card__divider span {
+  color: #d4a574;
+  font-size: 12px;
+  margin: 0 12px;
+  text-shadow: 0 0 12px rgba(212, 165, 116, 0.8);
+}
+
+/* Цена */
+.price-card__value {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.price-card__num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 88px;
+  font-weight: 700;
+  line-height: 1;
+  background: linear-gradient(135deg, #f0d29b 0%, #d4a574 50%, #e08858 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.03em;
+  filter: drop-shadow(0 4px 20px rgba(212, 165, 116, 0.35));
+}
+
+.price-card__plus {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 600;
+  color: #d4a574;
+  line-height: 1;
+  margin-right: -2px;
+}
+
+.price-card__currency {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #d4a574;
+  letter-spacing: 0.15em;
+}
+
+/* Подпись под ценой */
+.price-card__sub {
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  color: rgba(245, 239, 230, 0.5);
+  margin-bottom: 20px;
+  letter-spacing: 0.05em;
+}
+
+/* Рукописная подпись */
+.price-card__hand {
+  font-family: 'Caveat', cursive;
+  font-size: 26px;
+  font-weight: 600;
+  color: #f0b48a;
+  line-height: 1.2;
+  margin-top: 8px;
+  opacity: 0.9;
+}
+
+/* ===== Примечание ===== */
+.pricing__note {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  max-width: 720px;
+  margin: 0 auto 40px;
+  padding: 24px 28px;
+  background: rgba(212, 165, 116, 0.08);
+  border-left: 3px solid #d4a574;
+  border-radius: var(--radius-sm);
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.pricing__note-icon {
+  font-size: 22px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.pricing__note-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: cent18px;
+  font-style: italic;
+  color: rgba(245, 239, 230, 0.8);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Кнопка */
+.pricing__cta {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== Адаптив ===== */
+@media (max-width: 1000px) {
+  .pricing__grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+  }
+
+  .price-card--tilt-left {
+    transform: rotate(-2deg);
+  }
+  .price-card--tilt-right {
+    transform: rotate(2deg);
+  }
+  .price-card--accent {
+    transform: rotate(0deg) translateY(-10px);
+  }
+}
+
+@media (max-width: 640px) {
+  .pricing {
+    padding: 80px 0;
+  }
+
+  .price-card,
+  .price-card--tilt-left,
+  .price-card--tilt-right,
+  .price-card--ac {
+    transform: rotate(0deg) !important;
+    padding: 36px 24px;
+  }
+  .price-card:hover,
+  .price-card--tilt-left:hover,
+  .price-card--tilt-right:hover,
+  .price-card--accent:hover {
+    transform: translateY(-6px) !important;
+  }
+
+  .price-card__num {
+    font-size: 64px;
+  }
+  .price-card__plus {
+    font-size: 36px;
+  }
+  .price-card--accent .price-card__title {
+    font-size: 22px;
+  }
+  .price-card__hand {
+    font-size: 22px;
+  }
+
+  .pricing__note {
+    padding: 20px;
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+  .pricing__note-icon {
+    font-size: 28px;
+    margin: 0 auto;
+    }
+  .pricing__note-text {
+    font-size: 16px;
+  }
+}
